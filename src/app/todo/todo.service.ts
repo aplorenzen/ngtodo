@@ -9,10 +9,12 @@ export class TodoService {
 
   apiURL = 'http://localhost:5000';
 
+  todos: Todo[] = [];
+
   constructor(private httpClient: HttpClient) { }
 
   public createTodo(todo: Todo) {
-    return this.httpClient.put(`${this.apiURL}/todos/1`, todo);
+    return this.httpClient.put<Todo>(`${this.apiURL}/todos/1`, todo);
   }
 
   public updateTodo(todo: Todo) {

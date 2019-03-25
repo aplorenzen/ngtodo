@@ -1,21 +1,38 @@
-<h4>Create a new TODO item</h4>
-<form>
-  <div class="form-group">
-    <label for="todoTask">What is the task title?</label>
-    <input type="text" class="form-control" id="todoTask" name="todoTask" [(ngModel)]="todoTask" placeholder="Enter your task description here">
-  </div>
-  <div class="form-check form-check-inline">
-    <input type="checkbox" class="form-check-input" id="todoDone" name="todoDone" [(ngModel)]="todoDone" value="false">
-    <label class="form-check-label" for="todoDone">Is the task done?</label>
-  </div>
-  <button type="submit" class="btn btn-primary float-" (click)="addTodo()">Submit</button>
-</form>
-<br>
-<h4>My TODO list</h4>
+<div class="row">
+  <div class="col">
+    <div>
+      <h4>Create a new TODO item</h4>
+      <form>
+        <div class="form-group">
+          <label for="todoTask">What is the task title?</label>
+          <input type="text" class="form-control" id="todoTask" name="todoTask" [(ngModel)]="todoTask"
+                 placeholder="Enter your task description here">
+        </div>
+        <div class="form-check form-check-inline">
+          <input type="checkbox" class="form-check-input" id="todoDone" name="todoDone" [(ngModel)]="todoDone"
+                 value="false">
+          <label class="form-check-label" for="todoDone">Is the task done?</label>
+        </div>
+        <button type="submit" class="btn btn-primary float-" (click)="addTodo()">Submit</button>
+      </form>
+    </div>
+    <br>
+    <h4>My TODO list</h4>
+    <br>
+    <div class="input-group input-group-lg m-2" *ngFor="let todo of todos">
+      <div class="input-group-prepend">
+        <div class="input-group-text">
+          <input type="checkbox" id="{{todo._id}}" [(ngModel)]="todo.done" (ngModelChange)="onCheckboxChange(todo)">
+        </div>
+      </div>
+      <input type="text" class="form-control" readonly value="{{todo.task}}">
+      <div class="input-group-append">
+        <button class="btn btn-danger" type="button" (click)="onDeleteTodo(todo)"><i class="fas fa-trash-alt"></i>
+        </button>
+      </div>
+    </div>
 
-<ul>
-  <div *ngFor="let todo of todos">
-    {{todo.task}}
-  </div>
 
-</ul>
+  </div>
+</div>
+

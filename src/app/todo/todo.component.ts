@@ -29,12 +29,19 @@ export class TodoComponent implements OnInit {
   addTodo() {
     const newTodo: Todo = { _id: null, task: this.todoTask, done: this.todoDone };
     this.todoService.createTodo(newTodo).subscribe((res) => {
-      console.log(res);
+      this.todos.push(res);
     });
-
-    this.getTodos();
   }
 
-  
+  onCheckboxChange(todo: Todo) {
+    this.todoService.updateTodo(todo).subscribe((res) => {
+      console.log(res);
+    });
+  }
 
+  onDeleteTodo(todo: Todo) {
+    this.todoService.deleteTodoById(todo._id).subscribe((res) => {
+      this.todos = this.todos.filter(obj => obj !== todo);
+    });
+  }
 }
